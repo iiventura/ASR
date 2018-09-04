@@ -1,0 +1,40 @@
+1.  Activar el disco en Virtual Box
+    mkdir /media/CentOS
+    mount /dev/sr0 /media/CentOS #asegurarnos que el disco esta en esa directorio
+    lsblk #comprobar que el montaje se hizo
+    vim /etc/yum.repo.d/CentOS-Base.repo ==> (enable=0)
+    vim /etc/yum.repo.d/CentOS-Base.repo ==> (enable=1 y baseurl=file:///media/CentOS )
+    yum clean all
+    yum update #no descargar los paquetes
+    yum install ruby
+
+2.  atq #No muestra nada porque no hay ningun trabajo
+    at 2am #asignar tarea  esa hora
+    systemctl reboot #Ctrl +d para finalizar
+    atq #comprobar que hay un trabajo en el sistema
+
+3.  #!/bin/bash
+    if [ -f $1 ]; then 
+        du -h $1 | grep #falta el omitir el fichero
+    fi
+
+4.  Debes haber creado el disco en Virtual Box
+    su -
+    fdisk /dev/disco
+    n (+50MB) #para cada particion
+    pvcreate /dev/particion1; pvcreate /dev/particion2
+    vgcreate examen /dev/particion1 /dev/particion2
+    lvcreate examen -n volex -L 75MB
+    lvdisplay
+
+    mkdir /mnt
+    mkfs -t ext4 /dev/examen/volex /mnt
+    mount /dev/examen/volex /mnt
+    lsblk
+
+    blkid #comprobamos su UUID
+    /etc/fstab  ==> UUID /mnt defaults 0 0
+
+5.  systemctl stop NetworkManager
+    systemctl stop iptables
+6.

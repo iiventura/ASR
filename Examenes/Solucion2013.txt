@@ -1,0 +1,23 @@
+1. useradd usuario1 -G "audio" -m 
+2. 
+3. /etc/shadow  !root
+
+4.  Crear disco desde Vistual Box
+    su -
+    fdisk 
+    n # para cada particion 
+    t # L por si quieres ver la lista de opciones 
+    w
+    lsblk
+
+5.  mkswap /dev/<particion> #Formatear
+    swapon /dev/<particion> #Activar
+
+6.  mkfs -t ext3 -L examen_vol  /dev/<psrticion>
+    mount /dev/<particion>
+
+7.  blkid #obtenemos el UUID
+    /etc/fstab ==> UUID /mnt defaults 0 0
+8.
+9.
+10.
